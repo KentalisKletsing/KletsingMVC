@@ -22,20 +22,20 @@
                 <ul class="nav navbar-nav">
                     @if (User.IsInRole("default"))
                     {
-                        <li>@Html.ActionLink("Fonetiek", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Fonologie", "Index", "Home")</li>
                         <li>@Html.ActionLink("Woorden", "Index", "Home")</li>
+                        @*<li>@Html.ActionLink("Fonetiek", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Fonologie", "Index", "Home")</li>
                         <li>@Html.ActionLink("Zinsbouw", "Index", "Home")</li>
                         <li>@Html.ActionLink("Pragmatiek", "Index", "Home")</li>
                         <li>@Html.ActionLink("Auditief", "Index", "Home")</li>
                         <li>@Html.ActionLink("Thema", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Lessen", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Lessen", "Index", "Home")</li>*@
                     }
                 </ul>
                 @if (User.IsInRole("default"))
                 {
                     <ul class="nav navbar-nav navbar-right">
-                        <li>@Html.ActionLink("Hallo, " + User.Identity.Name, "Index", "Home")</li>
+                        <li>@Html.ActionLink("Hallo, " + User.Identity.Name, "Index", "Account")</li>
                         <li>
                             <asp:loginstatus runat="server" logoutaction="Redirect" logouttext="Log off" logoutpageurl="Default.aspx" onloggingout="LogOut" />
                         </li>
@@ -44,8 +44,8 @@
                 else
                 {
                     <ul class="nav navbar-nav navbar-right">
-                        <li>@Html.ActionLink("Registreer", "Index", "Home")</li>
-                        <li>@Html.ActionLink("Log in", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Registreer", "Register", "Account")</li>
+                        <li>@Html.ActionLink("Log in", "Login", "Account")</li>
                     </ul>
                 }
             </div>

@@ -1,4 +1,4 @@
-﻿@model KletsingMVC.Models.Word
+﻿@model KletsingMVC.Models.WordListWordTypeViewModel
 
 @{
     ViewBag.Title = "Create";
@@ -23,13 +23,7 @@
             </div>
         </div>
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.Text, new { @class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.Text)
-                @Html.ValidationMessageFor(model => model.Text)
-            </div>
-        </div>
+        @Model.WordTypes.Count
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">

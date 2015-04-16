@@ -140,6 +140,7 @@
     <Compile Include="Models\Song.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Word.cs" />
+    <Compile Include="Models\WordListWordTypeViewModel.cs" />
     <Compile Include="Models\WordType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

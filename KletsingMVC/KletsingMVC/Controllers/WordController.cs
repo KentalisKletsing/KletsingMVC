@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KletsingMVC.DAL;
+using KletsingMVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +10,7 @@ namespace KletsingMVC.Controllers
 {
     public class WordController : Controller
     {
+        private KletsingDbContext db = new KletsingDbContext();
         //
         // GET: /Word/
         public ActionResult Index()
@@ -26,7 +29,8 @@ namespace KletsingMVC.Controllers
         // GET: /Word/Create
         public ActionResult Create()
         {
-            return View();
+            WordListWordTypeViewModel vm = new WordListWordTypeViewModel { Text = "", WordTypes = db.WordTypes.ToList() };
+            return View(vm);
         }
 
         //
