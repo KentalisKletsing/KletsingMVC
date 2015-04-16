@@ -4,12 +4,12 @@
     ViewBag.Title = "Registreer";
 }
 
-<h2>Registreer</h2>
+<h2>@ViewBag.Title</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
         <hr />
         @Html.ValidationSummary(true)
@@ -17,7 +17,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Email, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Email)
+                @Html.TextBoxFor(model => model.Email, new { @class = "form-control", type = "email" })
                 @Html.ValidationMessageFor(model => model.Email)
             </div>
         </div>
@@ -25,14 +25,14 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Password, new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Password)
+                @Html.PasswordFor(model => model.Password, new { @class = "form-control" })
                 @Html.ValidationMessageFor(model => model.Password)
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Maak aan" class="btn btn-default" />
+                <input type="submit" value="Maak aan" class="btn btn-lg btn-primary btn-block" />
             </div>
         </div>
     </div>
