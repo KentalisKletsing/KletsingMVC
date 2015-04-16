@@ -27,6 +27,18 @@ namespace KletsingMVC.DAL
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
             modelBuilder.Conventions.Remove<PluralizingTableNameConvention>();
+            modelBuilder.Entity<Word>().HasMany(w => w.Songs).WithMany(s => s.Words).Map(t => t.MapLeftKey("Word").MapRightKey("Song").ToTable("wordsong"));
+        }
+
+        public Word getWordFromString(string wordString)
+        {
+            Word newWord = null;
+            var word = Words.Include(i => i.Songs).Where(i => i.Text == wordString).SingleOrDefault();
+            if(word == null)
+            {
+                
+            }
+            return word;
         }
     }
 }

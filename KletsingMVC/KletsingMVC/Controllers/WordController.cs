@@ -15,14 +15,16 @@ namespace KletsingMVC.Controllers
         // GET: /Word/
         public ActionResult Index()
         {
-            return View();
+
+            return View(db.Words.ToList());
         }
 
         //
         // GET: /Word/Details/5
-        public ActionResult Details(int id)
+        public ActionResult Details(string id)
         {
-            return View();
+           Word newWord = db.getWordFromString(id);
+            return View(newWord);
         }
 
         //

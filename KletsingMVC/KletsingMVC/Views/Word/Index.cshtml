@@ -1,27 +1,33 @@
 ﻿@model IEnumerable<KletsingMVC.Models.Word>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Woorden";
 }
 
-<h2>Index</h2>
+<h2>Woorden</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create")
+    @Html.ActionLink("Voeg een woord toe", "Create")
 </p>
 <table class="table">
     <tr>
-        <th></th>
+        <th>Woord</th>
+        <th>Aantal Liedjes</th>
+        <th>Aanpassen/Verwijderen</th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.Text }) |
-            @Html.ActionLink("Details", "Details", new { id=item.Text }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.Text })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@Html.ActionLink(item.Text, "Details", new { id = item.Text })</td>
+
+            <td>7</td>
+
+            <td>
+                @Html.ActionLink("Aanpassen", "Edit", new { id = item.Text }) |
+                @Html.ActionLink("Verwijderen", "Delete", new { id = item.Text })
+            </td>
+        </tr>
+    }
 
 </table>
