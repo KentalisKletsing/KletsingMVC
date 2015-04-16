@@ -12,6 +12,13 @@ namespace KletsingMVC.DAL
         protected override void Seed(KletsingDbContext context)
         {
             context.Users.Add(new User { Email = "jorisdouven@hotmail.com", Password = "test", Role = "super" });
+            string alphabet = "abcdefghijklmnoprstuvwyz";
+            foreach(char c in alphabet){
+                context.WordTypes.Add(new WordType { Text = c.ToString(), Location = -1 });
+                context.WordTypes.Add(new WordType { Text = c.ToString(), Location = 0 });
+                context.WordTypes.Add(new WordType { Text = c.ToString(), Location = 1 });
+            }
+            
             base.Seed(context);
         }
     }

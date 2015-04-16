@@ -9,6 +9,7 @@ namespace KletsingMVC.Models
     public class WordType
     {
         [Key]
+        public int ID { get; set; }
         [StringLength(1, ErrorMessage = "Has to be 1 character.")]
         public string Text { get; set; }
         [Range(-1, 1)]

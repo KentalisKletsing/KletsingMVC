@@ -1,4 +1,6 @@
-﻿using System;
+﻿using KletsingMVC.DAL;
+using KletsingMVC.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,6 +10,7 @@ namespace KletsingMVC.Controllers
 {
     public class AccountController : Controller
     {
+        private KletsingDbContext db = new KletsingDbContext();
         //
         // GET: /Account/
         public ActionResult Index()
@@ -26,10 +29,11 @@ namespace KletsingMVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Register(FormCollection formCollection)
+        public ActionResult Register(User user)
         {
-            string email = formCollection.Get(0);
-            Console.Out.Write(email);
+            user.Role = "default";
+            db.Users.Add(user);
+            db.SaveChangesAsync();
             return View();
         }
 	}

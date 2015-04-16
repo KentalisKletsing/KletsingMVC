@@ -130,16 +130,17 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\WordController.cs" />
     <Compile Include="DAL\KletsingDbContext.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="DAL\KletsingDbInitializer.cs" />
-    <Compile Include="Models\WordType.cs" />
     <Compile Include="Models\Lesson.cs" />
     <Compile Include="Models\Song.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Models\Word.cs" />
+    <Compile Include="Models\WordType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -160,6 +161,7 @@
     <Content Include="Icon.png" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <None Include="Properties\PublishProfiles\kletsing.pubxml" />
     <None Include="Scripts\jquery-2.1.3.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.3.js" />
     <Content Include="Scripts\jquery-2.1.3.min.js" />
@@ -188,6 +190,8 @@
     <Content Include="Views\Account\Login.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Index.cshtml" />
+    <Content Include="Views\Word\Index.cshtml" />
+    <Content Include="Views\Word\Create.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

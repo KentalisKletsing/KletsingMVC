@@ -20,8 +20,8 @@ namespace KletsingMVC.DAL
 
         public DbSet<User> Users { get; set; }
         public DbSet<Word> Words { get; set; }
-        public DbSet<WordType> WordTypes { get; set; }
         public DbSet<Song> Songs { get; set; }
+        public DbSet<WordType> WordTypes { get; set; }
         public DbSet<Lesson> Lessons { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
