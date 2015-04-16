@@ -16,14 +16,38 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Application name", "Index", "Home", null, new { @class = "navbar-brand" })
+                @Html.ActionLink("Klet's - sing", "Index", "Home", null, new { @class = "navbar-brand" })
             </div>
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("Home", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
-                    <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    @if (User.IsInRole("default"))
+                    {
+                        <li>@Html.ActionLink("Fonetiek", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Fonologie", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Woorden", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Zinsbouw", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Pragmatiek", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Auditief", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Thema", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Lessen", "Index", "Home")</li>
+                    }
                 </ul>
+                @if (User.IsInRole("default"))
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Hallo, " + User.Identity.Name, "Index", "Home")</li>
+                        <li>
+                            <asp:loginstatus runat="server" logoutaction="Redirect" logouttext="Log off" logoutpageurl="Default.aspx" onloggingout="LogOut" />
+                        </li>
+                    </ul>
+                }
+                else
+                {
+                    <ul class="nav navbar-nav navbar-right">
+                        <li>@Html.ActionLink("Registreer", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Log in", "Index", "Home")</li>
+                    </ul>
+                }
             </div>
         </div>
     </div>
@@ -31,7 +55,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
+            <p>&copy; @DateTime.Now.Year - Kentalis</p>
         </footer>
     </div>
 

@@ -9,10 +9,11 @@ using MySql.Data.Entity;
 
 namespace KletsingMVC.DAL
 {
-    [DbConfigurationType(typeof(MySqlEFConfiguration))]
+    //[DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class KletsingDbContext : DbContext
     {
-        public KletsingDbContext() : base("Server=84.28.193.115;Port=3306;Database=kletsing2;Uid=remoteuser;Pwd=420blaze")
+        public KletsingDbContext()
+            : base("name=KletsingDbContextConnectionString")
         {
             Database.SetInitializer<KletsingDbContext>(new KletsingDbInitializer());
         }

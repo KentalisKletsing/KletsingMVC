@@ -15,10 +15,6 @@ namespace KletsingMVC.Controllers
         public ActionResult Index()
         {
             KletsingDbContext db = new KletsingDbContext();
-            WordType type = new WordType {Text = "b", Location = -1};
-            //db.WordTypes.Add(type);
-            db.Words.Add(new Word { Text = "Bus", Type = type, Songs = new List<Song>() });
-            db.SaveChanges();
             return View();
         }
 
