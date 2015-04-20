@@ -1,38 +1,50 @@
 ﻿@model KletsingMVC.Models.Word
 
 @{
-    ViewBag.Title = Model.Text;
-}
-
-<h2>@Model.Text</h2>
-
-<div>
-    <h4>Liedjes die horen bij het woord: @Model.Text</h4>
-	@*<hr />
-    <dl class="dl-horizontal">
-    </dl>*@
-</div>
-
-<table class="table">
-    <tr>
-        <th>Naam</th>
-        <th>--</th>
-        <th>Verwijderen</th>
-    </tr>
-
-    @foreach (var item in Model.Songs)
+    if (Model == null)
     {
-        <tr>
-            <td>@Html.ActionLink(item.Name, "Details", new { id = item.Name })</td>
+        Response.Redirect("~/Word/");
 
-            <td>
-                @Html.ActionLink("Verwijderen", "Delete", new { id = item.Name })
-            </td>
-        </tr>
+    }
+    else
+    {
+        ViewBag.Title = Model.Text;
+        <h2>@Model.Text</h2>
+
+        <div>
+            <h4>Liedjes die horen bij het woord: @Model.Text</h4>
+            @*<hr />
+                <dl class="dl-horizontal">
+                </dl>*@
+        </div>
+
+        <table class="table">
+            <tr>
+                <th>Naam</th>
+                <th>[Nog leeg]</th>
+                <th>Verwijderen</th>
+            </tr>
+
+           
+            @foreach (var item in Model.Songs)
+            {
+                
+                <tr>
+                    <td>@Html.ActionLink(item.Name, "Details", new { id = item.Name })</td>
+
+                    <td>
+                        @Html.ActionLink("Verwijderen", "Delete", new { id = item.Name })
+                    </td>
+                </tr>
+            }
+
+        </table>
+        <p>
+            @*@Html.ActionLink("Edit", "Edit", new { id = Model.Text }) |*@
+            @Html.ActionLink("Back to List", "Index")
+        </p>
     }
 
-</table>
-<p>
-    @Html.ActionLink("Edit", "Edit", new { id = Model.Text }) |
-    @Html.ActionLink("Back to List", "Index")
-</p>
+}
+
+

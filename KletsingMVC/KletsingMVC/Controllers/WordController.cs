@@ -15,8 +15,21 @@ namespace KletsingMVC.Controllers
         // GET: /Word/
         public ActionResult Index()
         {
-
             return View(db.Words.ToList());
+        }
+
+        [HttpPost]
+        public ActionResult Index(string name)
+        {
+            List<Word> words = new List<Word>();
+            foreach(Word word in db.Words.ToList())
+            {
+                if(word.Text.Contains(name))
+                {
+                    words.Add(word);
+                }
+            }
+            return View(words);
         }
 
         //

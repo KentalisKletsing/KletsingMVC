@@ -7,7 +7,12 @@
 <h2>Woorden</h2>
 
 <p>
-    @Html.ActionLink("Voeg een woord toe", "Create")
+    @Html.ActionLink("Woord toevoegen", "Create")
+    @using (Html.BeginForm())
+    {
+        @Html.TextBox("name")
+        <input type="submit" value="Search" class="btn btn-primary" />
+    }
 </p>
 <table class="table">
     <tr>
@@ -16,12 +21,23 @@
         <th>Aanpassen/Verwijderen</th>
     </tr>
 
+    @{string lastChar = "ab";    }
     @foreach (var item in Model)
     {
+        if (lastChar != item.Text.Substring(0, 1))
+        {
+            lastChar = item.Text.Substring(0, 1);
+            <tr>
+                <th id="@lastChar">@lastChar</th>
+                <th></th>
+                <th></th>
+            </tr>
+
+        }
         <tr>
             <td>@Html.ActionLink(item.Text, "Details", new { id = item.Text })</td>
 
-            <td>7</td>
+            <td>@item.Songs.Count</td>
 
             <td>
                 @Html.ActionLink("Aanpassen", "Edit", new { id = item.Text }) |
