@@ -14,7 +14,7 @@ namespace KletsingMVC.DAL
         {
             System.Diagnostics.Debug.WriteLine("Seeding database...");
             //Password = "test"
-            context.Users.Add(new User { Email = "jorisdouven@hotmail.com", Password = "C8059E2EC7419F590E79D7F1B774BFE6", Roles = "default;super" });
+            context.Users.Add(new User { Email = "test@hotmail.com", Password = "C8059E2EC7419F590E79D7F1B774BFE6", Roles = "default;super" });
             string alphabet = "abcdefghijklmnoprstuvwyz";
             foreach (char c in alphabet)
             {
