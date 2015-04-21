@@ -1,29 +1,29 @@
 ﻿@model KletsingMVC.Models.User
 
 @{
-    ViewBag.Title = Model.Email;
+    ViewBag.Title = "Account";
 }
 
 <h2>Details</h2>
 
 <div>
     <h4>Gebruiker</h4>
-	<hr />
+    <hr />
     <dl class="dl-horizontal">
         <dt>
-            @Html.DisplayNameFor(model => model.Password)
+            @Html.DisplayNameFor(model => model.Email)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Password)
+            @Html.DisplayFor(model => model.Email)
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(model => model.Role)
+            @Html.DisplayNameFor(model => model.Roles)
         </dt>
 
         <dd>
-            @Html.DisplayFor(model => model.Role)
+            @Html.DisplayFor(model => model.Roles)
         </dd>
 
     </dl>

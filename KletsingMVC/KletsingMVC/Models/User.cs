@@ -16,6 +16,6 @@ namespace KletsingMVC.Models
         public string Email { get; set; }
         [StringLength(255, ErrorMessage = "Password cannot be longer than 255 characters.")]
         public string Password { get; set; }
-        public string Role { get; set; }
+        public string Roles { get; set; }
     }
 }
