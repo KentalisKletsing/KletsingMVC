@@ -13,5 +13,8 @@ namespace KletsingMVC.Models
         public string Name { get; set; }
 
         public virtual ICollection<Word> Words { get; set; }
+        public string audioName { get; set; }
+        public string pdfName { get; set; }
+        public string videoName { get; set; }
     }
 }

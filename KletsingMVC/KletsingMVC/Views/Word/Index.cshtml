@@ -12,7 +12,7 @@
     @using (Html.BeginForm("Search", "Word"))
     {
         @Html.TextBox("name")
-    <input type="submit" value="Zoeken" class="btn btn-default" />
+        <input type="submit" value="Zoeken" class="btn btn-default" />
     }
 </p>
 <table class="table">
@@ -25,6 +25,7 @@
     @{string lastChar = "";    }
     @foreach (var item in Model)
     {
+        item.Songs = new List<KletsingMVC.Models.Song>();
         if (lastChar != item.Text.Substring(0, 1))
         {
             lastChar = item.Text.Substring(0, 1);
@@ -40,10 +41,18 @@
 
             <td>@item.Songs.Count</td>
 
-            <td>
-                @Html.ActionLink("Aanpassen", "Edit", new { id = item.Text }) |
-                @Html.ActionLink("Verwijderen", "Delete", new { id = item.Text }, new { onclick = "return confirm('Weet u zeker dat u het woord " + item.Text + " wilt verwijderen?')" })
-            </td>
+            @if (User.IsInRole("super"))
+            {
+                <td>
+                    @Html.ActionLink("Aanpassen", "Edit", new { id = item.Text }) |
+                    @Html.ActionLink("Verwijderen", "Delete", new { id = item.Text }, new { onclick = "return confirm('Weet u zeker dat u het woord " + item.Text + " wilt verwijderen?')" })
+                </td>
+            }
+            else
+            {
+                <td>Verwijderen en aanpassen is niet beschikbaar</td>
+            }
+            
         </tr>
     }
 

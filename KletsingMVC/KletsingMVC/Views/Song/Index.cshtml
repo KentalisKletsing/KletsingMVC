@@ -1,0 +1,33 @@
+﻿@model KletsingMVC.Models.Song
+
+@{
+    ViewBag.Title = "Index";
+    if (Model == null)
+    {
+        Response.Redirect("~/Word/");
+    }
+    else
+    {
+        <h2>@Model.Name</h2>
+        //Doe iets met Model.pdfName, Model.audioName, Model.videoName
+        <br />
+        <h4>Lesbrief</h4>
+        <p>Klik op onderstaande link om de lesbrief te openen</p>
+        <a href="/testMedia/overzicht_kentalis_website.pdf">Lesbrief</a>
+        <hr />
+        <h4>Geluidsfragment</h4>
+        <audio controls>
+            <source src="/testMedia/testgeluid.mp3" type="audio/mpeg">
+            Your browser does not support the audio element.
+        </audio>
+        <hr />
+        <h4>Video</h4>
+        <video width="320" height="240" controls>
+            <source src="/testMedia/testVideo.mp4" type="video/mp4">
+            <source src="movie.ogg" type="video/ogg">
+            Your browser does not support the video tag.
+        </video>
+    }
+}
+
+
