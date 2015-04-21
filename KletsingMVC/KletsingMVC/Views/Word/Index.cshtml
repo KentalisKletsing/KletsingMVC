@@ -42,7 +42,7 @@
 
             <td>
                 @Html.ActionLink("Aanpassen", "Edit", new { id = item.Text }) |
-                @Html.ActionLink("Verwijderen", "Delete", new { id = item.Text })
+                @Html.ActionLink("Verwijderen", "Delete", new { id = item.Text }, new { onclick = "return confirm('Weet u zeker dat u het woord " + item.Text + " wilt verwijderen?')" })
             </td>
         </tr>
     }

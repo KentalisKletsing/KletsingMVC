@@ -140,12 +140,23 @@ namespace KletsingMVC.Controllers
             try
             {
                 // TODO: Add update logic here
-
+                Word word = new Word() ;
+                List<Word> words = db.Words.ToList();
+                foreach(var item in words)
+                {
+                    if(item.Text == id)
+                    {
+                        word = item;
+                    }
+                }
+                db.Words.Remove(word);
+                db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            catch
+            catch(Exception ex)
             {
-                return View();
+
+                return RedirectToAction("Index");
             }
         }
 
