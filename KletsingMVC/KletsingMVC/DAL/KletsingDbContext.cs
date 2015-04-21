@@ -32,7 +32,6 @@ namespace KletsingMVC.DAL
 
         public Word getWordFromString(string wordString)
         {
-            Word newWord = null;
             var word = Words.Include(i => i.Songs).Where(i => i.Text == wordString).SingleOrDefault();
             if(word == null)
             {

@@ -8,10 +8,11 @@
 
 <p>
     @Html.ActionLink("Woord toevoegen", "Create")
-    @using (Html.BeginForm())
+
+    @using (Html.BeginForm("Search", "Word"))
     {
         @Html.TextBox("name")
-        <input type="submit" value="Search" class="btn btn-primary" />
+    <input type="submit" value="Zoeken" class="btn btn-default" />
     }
 </p>
 <table class="table">
@@ -21,7 +22,7 @@
         <th>Aanpassen/Verwijderen</th>
     </tr>
 
-    @{string lastChar = "ab";    }
+    @{string lastChar = "";    }
     @foreach (var item in Model)
     {
         if (lastChar != item.Text.Substring(0, 1))

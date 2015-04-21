@@ -4,35 +4,73 @@
     ViewBag.Title = "Create";
 }
 
-<h2>Create</h2>
+<h2>Voeg een woord toe</h2>
 
-@using (Html.BeginForm()) 
+@if (Model.Text != "")
+{
+    if (Model.Text.Contains("niet toegevoegd"))
+    {
+        <div class="alert alert-danger alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>@Model.Text</strong>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-success alert-dismissible" role="alert">
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <strong>@Model.Text</strong>
+        </div>
+    }
+}
+
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    
+
     <div class="form-horizontal">
-        <h4>Word</h4>
         <hr />
         @Html.ValidationSummary(true)
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Text, new { @class = "control-label col-md-2" })
+
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Text)
-                @Html.ValidationMessageFor(model => model.Text)
+                @Html.Label("Woord:")
+                <div class="col-md-offset-2">
+                    @Html.TextBox("name", "")
+                </div>
+            </div>
+            <div class="col-md-10">
+                @Html.Label("Bijbehorende letter:")
+                <div class="col-md-offset-2">
+                    @{HashSet<string> set = new HashSet<string>();
+                    foreach (var item in Model.WordTypes)
+                    {
+                        set.Add(item.Text);
+                    }}
+                    @Html.DropDownList("bijbehorendeLetter", new SelectList(set))
+                </div>
+            </div>
+            <div class="col-md-10">
+                @Html.Label("Positie:")
+                <div class="col-md-offset-2">
+                    @{List<string> location = new List<string>();
+                    location.Add("Begin");
+                    location.Add("Midden");
+                    location.Add("Eind");}
+                    @Html.DropDownList("positie", new SelectList(location))
+                </div>
             </div>
         </div>
 
-        @Model.WordTypes.Count
-
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+            <div class="col-md-10">
+                <input type="submit" value="Voeg toe" class="btn btn-default" />
             </div>
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Terug naar de woordenlijst", "Index")
 </div>

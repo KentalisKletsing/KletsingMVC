@@ -130,6 +130,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LetterController.cs" />
     <Compile Include="Controllers\WordController.cs" />
     <Compile Include="DAL\KletsingDbContext.cs" />
     <Compile Include="Global.asax.cs">
@@ -194,6 +195,7 @@
     <Content Include="Views\Word\Index.cshtml" />
     <Content Include="Views\Word\Create.cshtml" />
     <Content Include="Views\Word\Details.cshtml" />
+    <Content Include="Views\Letter\Index.cshtml" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>

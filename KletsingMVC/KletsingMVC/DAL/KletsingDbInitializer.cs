@@ -20,11 +20,11 @@ namespace KletsingMVC.DAL
                 context.WordTypes.Add(new WordType { Text = c.ToString(), Location = 1 });
             }
 
-            Word klaas = new Word { Text = "Klaas", Songs = new List<Song>() };
-            Word bus = new Word { Text = "Bus", Songs = new List<Song>() };
-            Word kaas = new Word { Text = "Kaas", Songs = new List<Song>() };
-            Word blaas = new Word { Text = "Blaas", Songs = new List<Song>() };
-            Word henk = new Word { Text = "Henk", Songs = new List<Song>() };
+            Word klaas = new Word { Text = "Klaas", Songs = new List<Song>(), Letter = "k", Location = -1 };
+            Word bus = new Word { Text = "Bus", Songs = new List<Song>(), Letter = "b", Location = -1};
+            Word kaas = new Word { Text = "Kaas", Songs = new List<Song>(), Letter = "s", Location = 1};
+            Word blaas = new Word { Text = "Blaas", Songs = new List<Song>(), Letter = "s", Location = 1};
+            Word henk = new Word { Text = "Henk", Songs = new List<Song>(), Letter = "h", Location = -1};
 
             context.Words.Add(klaas);
             context.Words.Add(bus);

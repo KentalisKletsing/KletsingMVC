@@ -13,23 +13,39 @@ namespace KletsingMVC.Controllers
         private KletsingDbContext db = new KletsingDbContext();
         //
         // GET: /Word/
-        public ActionResult Index()
+        public ActionResult Index(string letter)
         {
-            return View(db.Words.ToList());
+            List<Word> words = db.Words.ToList();
+            if (letter == null || letter == "")
+            {
+                return View(words);
+            }
+            else
+            {
+                List<Word> wordsWithLetter = new List<Word>();
+                foreach(var item in db.Words)
+                {
+                    if(item.Letter.ToLower() == letter.ToLower())
+                    {
+                        wordsWithLetter.Add(item);
+                    }
+                }
+                return View(wordsWithLetter);
+            }
         }
 
         [HttpPost]
-        public ActionResult Index(string name)
+        public ActionResult Search(string name)
         {
             List<Word> words = new List<Word>();
             foreach(Word word in db.Words.ToList())
             {
-                if(word.Text.Contains(name))
+                if(word.Text.ToLower().Contains(name.ToLower()))
                 {
                     words.Add(word);
                 }
             }
-            return View(words);
+            return View("Index", words);
         }
 
         //
@@ -51,11 +67,46 @@ namespace KletsingMVC.Controllers
         //
         // POST: /Word/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult Create(string name, string bijbehorendeLetter, string positie)
+        {
+            string message = "";
+            int location = 0;
+            switch(positie)
+            {
+                case "Begin":
+                    location = -1;
+                    break;
+                case "Midden":
+                    location = 0;
+                    break;
+                case "Eind":
+                    location = 1;
+                    break;
+                default:
+                    location = -1;
+                    break;
+            }
+            db.Words.Add(new Word { Text = name , Location = location, Letter = bijbehorendeLetter });
+            try
+            {
+                db.SaveChanges();
+                message = name + " toegevoegd";
+            }
+            catch(Exception ex)
+            {
+                message = name + " niet toegevoegd";
+            }
+            WordListWordTypeViewModel vm = new WordListWordTypeViewModel { Text = message, WordTypes = db.WordTypes.ToList() };
+                return View(vm);
+        }
+
+        //
+        // GET: /Word/Edit/5
+        public ActionResult Edit(string id)
         {
             try
             {
-                // TODO: Add insert logic here
+                // TODO: Add update logic here
 
                 return RedirectToAction("Index");
             }
@@ -66,16 +117,9 @@ namespace KletsingMVC.Controllers
         }
 
         //
-        // GET: /Word/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        //
         // POST: /Word/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult Edit(string id, FormCollection collection)
         {
             try
             {
@@ -91,15 +135,24 @@ namespace KletsingMVC.Controllers
 
         //
         // GET: /Word/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult Delete(string id)
         {
-            return View();
+            try
+            {
+                // TODO: Add update logic here
+
+                return RedirectToAction("Index");
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         //
         // POST: /Word/Delete/5
         [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult Delete(string id, FormCollection collection)
         {
             try
             {
