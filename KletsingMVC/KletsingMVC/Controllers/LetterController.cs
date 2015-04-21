@@ -13,12 +13,14 @@ namespace KletsingMVC.Controllers
         private KletsingDbContext db = new KletsingDbContext();
         //
         // GET: /Letter/
+        [Authorize(Roles = "default")]
         public ActionResult Index()
         {
             WordListWordTypeViewModel vm = new WordListWordTypeViewModel { WordTypes = db.WordTypes.ToList() };
             return View(vm);
         }
 
+        [Authorize(Roles = "default")]
         public ActionResult SelectLetter(string letter)
         {
             return RedirectToAction("Index", "Word", new { letter = letter });
