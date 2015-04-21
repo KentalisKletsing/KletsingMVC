@@ -13,6 +13,7 @@ namespace KletsingMVC.Controllers
         private KletsingDbContext db = new KletsingDbContext();
         //
         // GET: /Word/
+        [Authorize(Roles="default")]
         public ActionResult Index(string letter)
         {
             List<Word> words = db.Words.ToList();
@@ -34,6 +35,7 @@ namespace KletsingMVC.Controllers
             }
         }
 
+        [Authorize(Roles = "default")]
         [HttpPost]
         public ActionResult Search(string name)
         {
@@ -50,6 +52,7 @@ namespace KletsingMVC.Controllers
 
         //
         // GET: /Word/Details/5
+        [Authorize(Roles = "default")]
         public ActionResult Details(string id)
         {
            Word newWord = db.getWordFromString(id);
@@ -58,6 +61,7 @@ namespace KletsingMVC.Controllers
 
         //
         // GET: /Word/Create
+        [Authorize(Roles = "super")]
         public ActionResult Create()
         {
             WordListWordTypeViewModel vm = new WordListWordTypeViewModel { Text = "", WordTypes = db.WordTypes.ToList() };
@@ -66,6 +70,7 @@ namespace KletsingMVC.Controllers
 
         //
         // POST: /Word/Create
+        [Authorize(Roles = "super")]
         [HttpPost]
         public ActionResult Create(string name, string bijbehorendeLetter, string positie)
         {
@@ -102,6 +107,7 @@ namespace KletsingMVC.Controllers
 
         //
         // GET: /Word/Edit/5
+        [Authorize(Roles = "super")]
         public ActionResult Edit(string id)
         {
             try
@@ -118,6 +124,7 @@ namespace KletsingMVC.Controllers
 
         //
         // POST: /Word/Edit/5
+        [Authorize(Roles = "super")]
         [HttpPost]
         public ActionResult Edit(string id, FormCollection collection)
         {
@@ -135,6 +142,7 @@ namespace KletsingMVC.Controllers
 
         //
         // GET: /Word/Delete/5
+        [Authorize(Roles = "super")]
         public ActionResult Delete(string id)
         {
             try
@@ -162,6 +170,7 @@ namespace KletsingMVC.Controllers
 
         //
         // POST: /Word/Delete/5
+        [Authorize(Roles = "super")]
         [HttpPost]
         public ActionResult Delete(string id, FormCollection collection)
         {

@@ -16,6 +16,7 @@ namespace KletsingMVC.Controllers
     {
         //
         // GET: /Account/
+        [Authorize]
         public ActionResult Index()
         {
             using (KletsingDbContext db = new KletsingDbContext())
