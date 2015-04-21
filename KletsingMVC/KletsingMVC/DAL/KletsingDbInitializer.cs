@@ -4,6 +4,7 @@ using System.Data.Entity;
 using System.Linq;
 using System.Web;
 using KletsingMVC.Models;
+using KletsingMVC.Controllers;
 
 namespace KletsingMVC.DAL
 {
@@ -11,7 +12,9 @@ namespace KletsingMVC.DAL
     {
         protected override void Seed(KletsingDbContext context)
         {
-            context.Users.Add(new User { Email = "jorisdouven@hotmail.com", Password = "test", Role = "super" });
+            System.Diagnostics.Debug.WriteLine("Seeding database...");
+            //Password = "test"
+            context.Users.Add(new User { Email = "jorisdouven@hotmail.com", Password = "C8059E2EC7419F590E79D7F1B774BFE6", Roles = "default;super" });
             string alphabet = "abcdefghijklmnoprstuvwyz";
             foreach (char c in alphabet)
             {

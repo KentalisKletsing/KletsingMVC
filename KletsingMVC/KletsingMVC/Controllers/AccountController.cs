@@ -8,17 +8,22 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace KletsingMVC.Controllers
 {
     public class AccountController : Controller
     {
-        private KletsingDbContext db = new KletsingDbContext();
         //
         // GET: /Account/
         public ActionResult Index()
         {
-            return View();
+            using (KletsingDbContext db = new KletsingDbContext())
+            {
+                string username = HttpContext.User.Identity.Name;
+                User user = db.Users.SingleOrDefault(u => u.Email == username);
+                return View(user);
+            }
         }
 
         public ActionResult Login()
@@ -27,16 +32,41 @@ namespace KletsingMVC.Controllers
         }
 
         [HttpPost]
-        public ActionResult Login(User user, FormCollection formCollection)
+        public ActionResult Login(User model, string returnUrl)
         {
-            if (user != null)
+            if (ModelState.IsValid)
             {
-                return View();
+                using (KletsingDbContext db = new KletsingDbContext())
+                {
+                    string username = model.Email;
+                    string password = GetPasswordHash(model.Password);
+                    bool userValid = db.Users.Any(user => user.Email == username && user.Password == password);
+                    if (userValid)
+                    {
+                        FormsAuthentication.SetAuthCookie(username, false);
+                        if (Url.IsLocalUrl(returnUrl) && returnUrl.Length > 1 && returnUrl.StartsWith("/") && !returnUrl.StartsWith("//") && !returnUrl.StartsWith("/\\"))
+                        {
+                            return Redirect(returnUrl);
+                        }
+                        else
+                        {
+                            return RedirectToAction("Index", "Home");
+                        }
+                    }
+                    else
+                    {
+                        ModelState.AddModelError("", "De gebruikersnaam of het wachtwoord is incorrect.");
+                        return View();
+                    }
+                }
             }
-            else
-            {
-                return RedirectToAction("Index", "Home");
-            }
+            return View(model);
+        }
+
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
         }
 
         public ActionResult Register()
@@ -47,9 +77,13 @@ namespace KletsingMVC.Controllers
         [HttpPost]
         public ActionResult Register(User user)
         {
-            user.Role = "default";
-            db.Users.Add(user);
-            db.SaveChangesAsync();
+            user.Roles = "default";
+            user.Password = GetPasswordHash(user.Password);
+            using (KletsingDbContext db = new KletsingDbContext())
+            {
+                db.Users.Add(user);
+                db.SaveChangesAsync();
+            }
             return View();
         }
 
@@ -62,7 +96,6 @@ namespace KletsingMVC.Controllers
         {
             if (password != null)
             {
-                Console.WriteLine("Test getPassword");
                 UnicodeEncoding encoding = new UnicodeEncoding();
                 byte[] binaryPassword = encoding.GetBytes(password);
                 byte[] hashValue = (new MD5CryptoServiceProvider()).ComputeHash(binaryPassword);
