@@ -31,7 +31,8 @@
             {
                 
                 <tr>
-                    <td>@Html.ActionLink(item.Name, "Index", "Song", new { id = item.Name })</td>
+                    <td>@Html.ActionLink(item.Name, "Index", "Song", new { id = item.Name }, null)</td>
+                    <td></td>
 
                     <td>
                         @Html.ActionLink("Verwijderen", "Delete", new { id = item.Name })
